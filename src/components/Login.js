@@ -6,10 +6,10 @@ function Login(props) {
     return(
         <section>
         <label>Usuário:</label>
-        <input type="text" value={UserID} id="username" />
+        <input type="text" id="username" />
         <br/>
         <label>Senha:</label>
-        <input type="password" value={senha} id="password" />
+        <input type="password" id="password" />
         <br/>
         <button onClick={Confirmar}> Confirmar</button>
          
