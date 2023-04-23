@@ -1,3 +1,6 @@
+/*********************************
+ ******|      Login.js     |******
+ *********************************/ 
 
 function Login(props) {
 
@@ -18,13 +21,12 @@ function Login(props) {
 
     function Confirmar() {
         if (document.getElementById("username").value === props.UserID && document.getElementById("password").value === props.senha) {
-            window.alert("Entrada com sucesso!")
+            window.alert(`Usuário ${props.UserID} Entrada com sucesso!`)
         }else{
-            window.alert("Usuário ou senha incorretos.")
+            window.alert(`Usuário ${document.getElementById("username").value} ou senha incorretos.`)
         } 
     }
 
-    
 };
 
 export default Login;
