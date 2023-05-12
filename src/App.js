@@ -5,6 +5,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Login from './components/Login';
+import Agenda from './components/AgendaO';
 
 function App() {
 
@@ -14,7 +15,7 @@ function App() {
   return (
     <div>
      
-      <Login UserID={nome} senha={password} />
+      <Agenda/>
       
 
     </div>
