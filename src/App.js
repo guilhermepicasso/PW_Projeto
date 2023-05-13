@@ -2,25 +2,22 @@
  ******|      App.js     |******
  *********************************/
 
-import logo from './logo.svg';
-import './App.css';
-import Login from './components/Login';
-import Agenda from './components/AgendaO';
+import Agenda from './Pages/Agenda';
+import Header from './components/Header/header';
+import RouterApp from './routes';
+import Login from "./Pages/Login";
+
 
 function App() {
 
-  const nome = 'admin';
-  const password = '123';
-
   return (
+    
     <div>
-     
-      <Agenda/>
-      
-
+    <RouterApp />
     </div>
   );
  
 }
 
 export default App;
+ 

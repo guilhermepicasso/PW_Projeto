@@ -2,9 +2,15 @@
  ******|      Login.js     |******
  *********************************/ 
 
+ import { useNavigate } from 'react-router-dom';
+
 function Login(props) {
 
     const {UserID, senha} = props;
+    
+    const nome = "admin"
+    const password = "123"
+    let pagina = useNavigate();
 
     return(
         <section>
@@ -19,8 +25,9 @@ function Login(props) {
     );
 
     function Confirmar() {
-        if (document.getElementById("username").value === props.UserID && document.getElementById("password").value === props.senha) {
-            window.alert(`Usuário ${props.UserID} Entrada com sucesso!`)
+        if (document.getElementById("username").value === nome && document.getElementById("password").value === password) {
+            window.alert(`Usuário ${nome} Entrada com sucesso!`)
+            pagina('/agenda')
         }else{window.alert(`Usuário ${document.getElementById("username").value} ou senha incorretos.`)
         } 
     }
