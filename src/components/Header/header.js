@@ -4,7 +4,7 @@
  function Header() {
     return (
       <header class = "header">
-        <h4 > Capybara</h4>
+        <h4> CapNotion</h4>
         <div>
            <Link to="/agenda">Home</Link>
            <Link to="/sobre">Sobre Nós</Link>

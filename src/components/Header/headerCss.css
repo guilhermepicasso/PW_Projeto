@@ -1,10 +1,13 @@
 *{
     margin: 0;
 }
+h4{
+    font-size: 15px;
+}
 
 .header{
    background-color: orange;
-   padding: 20px 10px;
+   padding: 1px 10px;
    flex-direction: row;
    justify-content: space-between;
    display: flex;
@@ -12,7 +15,7 @@
 }
 .header a {
     color:#0b0b0b;
-    font-size: 20px;
+    font-size: 15px;
 }
 .header a + a{
     margin-left: 10px;
