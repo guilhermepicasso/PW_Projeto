@@ -1,14 +1,21 @@
-body{
-    background-color: aliceblue;
-}
-h1{
+
+.titulo{
     color: rgb(23, 22, 22);
-    font-size: 40px;
-    margin-left: 45%;    
+    display: flex;
+    align-items: center;
+    justify-content: center;    
 }
-h2{
-color: rgb(23, 22, 22);
-font-size: 25px;
-margin-left: 42%;
-margin-top: 1%;
+.senac{
+    color: rgb(23, 22, 22);
+    font-size: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.nome{
+    color: rgb(23, 22, 22);
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
