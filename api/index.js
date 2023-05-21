@@ -1,17 +1,15 @@
-//Tratando Route Params
 const express = require('express');
 const server = express();
 server.use(express.json())
-//localhost:8080/UserLogin/2      //Lista um unico prato
-//localhost:8080/ //Listatodos os pratos
-//localhost:8080/UserLogin/2    //alterar um prato
+//localhost:8080/UserLogin/2      //Lista um unico usuario
+//localhost:8080/ //Listatodos os usuario
+//localhost:8080/UserLogin/2    //alterar um usuario
 
 
-const usuario = [];
 
 
 const login = [
-    {user: "admin", senha:"123"}
+    {email:"admin@gmail.com",user: "admin", senha:"123"}
     
 ]
 
@@ -20,7 +18,7 @@ const login = [
 //Rota para listar um usuario 
 server.get('/UserLogin/:indiceInput', (req, res) => {
 const { indiceInput } = req.params
-return res.json({ user: `O ID dO user foi... ${login[indiceInput]}` })
+return res.json(login[indiceInput]);
 })
 
 //Rota para listar TODOS os usuarios
