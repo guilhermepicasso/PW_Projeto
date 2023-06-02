@@ -24,7 +24,7 @@ function Login(props) {
                 <br/>
                 <button class="login-button" onClick={Confirmar}>Confirmar</button>
                 <br/>
-                <Link to="/cadastro">Não tenho conta</Link>
+                <Link to="/cadastro">Não tenho contas</Link>
                 <div className="foto1"><img src={imagePath} alt="Capivara" width={400} /></div>
                 <div className="foto2"> <img src={"https://cdn.discordapp.com/attachments/822153718497411137/1114282816151232562/image.png"} alt="CapNotion"/> </div>
             </div>
