@@ -2,16 +2,13 @@
  ******|      AgendaO.js     |******
  *********************************/ 
 
- import React, { useState } from 'react';
+ import React, { useState, useRef } from 'react';
 import Header from '../../components/Header/header';
 import './agenda.css';
 
 function Agenda() {
   const [conteudo, setConteudo] = useState('');
-  const [fonte, setFonte] = useState('Arial, sans-serif');
-  const [tamanhoFonte, setTamanhoFonte] = useState('16px');
-  const [corFonte, setCorFonte] = useState('#000000');
-  const [imagem, setImagem] = useState('');
+  const menuContextoRef = useRef(null);
 
   function salvar() {
     localStorage.setItem('conteudo', conteudo);
@@ -27,25 +24,32 @@ function Agenda() {
     setConteudo(e.target.value);
   }
 
-  function alterarFonte(e) {
-    setFonte(e.target.value);
+  function exibirMenuContexto(e) {
+    e.preventDefault();
+
+    const menu = menuContextoRef.current;
+    menu.style.display = 'block';
+    menu.style.left = `${e.clientX}px`;
+    menu.style.top = `${e.clientY}px`;
   }
 
-  function alterarTamanhoFonte(e) {
-    setTamanhoFonte(e.target.value);
+  function aplicarEstilo() {
+    const menu = menuContextoRef.current;
+    const fonte = menu.querySelector('#fonte').value;
+    const tamanhoFonte = menu.querySelector('#tamanho-fonte').value + 'px'; // Adiciona 'px' ao valor do tamanho da fonte
+    const corFonte = menu.querySelector('#cor-fonte').value;
+
+    const textarea = document.getElementById('agenda-textarea');
+    textarea.style.fontFamily = fonte;
+    textarea.style.fontSize = tamanhoFonte;
+    textarea.style.color = corFonte;
+
+    fecharMenuContexto();
   }
 
-  function alterarCorFonte(e) {
-    setCorFonte(e.target.value);
-  }
-
-  function selecionarImagem(e) {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      setImagem(event.target.result);
-    };
-    reader.readAsDataURL(file);
+  function fecharMenuContexto() {
+    const menu = menuContextoRef.current;
+    menu.style.display = 'none';
   }
 
   return (
@@ -53,53 +57,47 @@ function Agenda() {
       <Header />
       <div className="agenda-body">
         <textarea
+          id="agenda-textarea"
           className="agenda-textarea"
           value={conteudo}
           onChange={areaDeTexto}
-          style={{ fontFamily: fonte, fontSize: tamanhoFonte, color: corFonte }}
+          onContextMenu={exibirMenuContexto}
+          style={{ width: '100%', height: '100%' }} // Ajusta a altura para ocupar a tela inteira
         />
-        <div>
-          <label htmlFor="fonte">Fonte:</label>
-          <select id="fonte" value={fonte} onChange={alterarFonte}>
-            <option value="Arial, sans-serif">Arial</option>
-            <option value="Verdana, sans-serif">Verdana</option>
-            <option value="Times New Roman, serif">Times New Roman</option>
-          </select>
-        </div>
-        <div>
-          <label htmlFor="tamanho-fonte">Tamanho da fonte:</label>
-          <input
-            id="tamanho-fonte"
-            type="text"
-            value={tamanhoFonte}
-            onChange={alterarTamanhoFonte}
-          />
-        </div>
-        <div>
-          <label htmlFor="cor-fonte">Cor da fonte:</label>
-          <input
-            id="cor-fonte"
-            type="color"
-            value={corFonte}
-            onChange={alterarCorFonte}
-          />
-        </div>
-        <div>
-          <label htmlFor="imagem">Imagem:</label>
-          <input
-            id="imagem"
-            type="file"
-            accept="image/*"
-            onChange={selecionarImagem}
-          />
-          {imagem && <img src={imagem} alt="Imagem selecionada" />}
-        </div>
         <button className="agenda-button" onClick={salvar}>
           Salvar
         </button>
         <button className="agenda-button" onClick={deletar}>
           Deletar
         </button>
+        <div className="menu-contexto" ref={menuContextoRef} onContextMenu={fecharMenuContexto}>
+          <div>
+            <label htmlFor="fonte">Fonte:</label>
+            <select id="fonte">
+              <option value="Arial">Arial</option>
+              <option value="Verdana">Verdana</option>
+              <option value="Times New Roman">Times New Roman</option>
+              <option value="Courier New">Courier New</option>
+              <option value="Georgia">Georgia</option>
+              <option value="Trebuchet MS">Trebuchet MS</option>
+              <option value="Arial Black">Arial Black</option>
+              <option value="Impact">Impact</option>
+              <option value="Lucida Sans Unicode">Lucida Sans Unicode</option>
+              <option value="Tahoma">Tahoma</option>
+              <option value="Verdana">Verdana</option>
+              <option value="Palatino Linotype">Palatino Linotype</option>   
+            </select>
+          </div>
+          <div>
+            <label htmlFor="tamanho-fonte">Tamanho da Fonte:</label>
+            <input type="number" id="tamanho-fonte" min="8" max="72" />
+          </div>
+          <div>
+            <label htmlFor="cor-fonte">Cor da Fonte:</label>
+            <input type="color" id="cor-fonte" />
+          </div>
+          <button onClick={aplicarEstilo}>Aplicar Estilo</button>
+        </div>
       </div>
     </>
   );
