@@ -1,7 +1,6 @@
 /*********************************
  ******|      AgendaO.js     |******
  *********************************/ 
-
  import React, { useState, useRef } from 'react';
 import Header from '../../components/Header/header';
 import './agenda.css';
@@ -36,13 +35,29 @@ function Agenda() {
   function aplicarEstilo() {
     const menu = menuContextoRef.current;
     const fonte = menu.querySelector('#fonte').value;
-    const tamanhoFonte = menu.querySelector('#tamanho-fonte').value + 'px'; // Adiciona 'px' ao valor do tamanho da fonte
+    const tamanhoFonte = menu.querySelector('#tamanho-fonte').value;
     const corFonte = menu.querySelector('#cor-fonte').value;
+    const imagemFundoInput = menu.querySelector('#imagem-fundo');
+    const imagemFundo = imagemFundoInput.files[0];
+    const larguraImagem = menu.querySelector('#largura-imagem').value;
+    const alturaImagem = menu.querySelector('#altura-imagem').value;
+    const posicaoHorizontal = menu.querySelector('#posicao-horizontal').value;
+    const posicaoVertical = menu.querySelector('#posicao-vertical').value;
 
     const textarea = document.getElementById('agenda-textarea');
     textarea.style.fontFamily = fonte;
-    textarea.style.fontSize = tamanhoFonte;
+    textarea.style.fontSize = `${tamanhoFonte}px`;
     textarea.style.color = corFonte;
+
+    if (imagemFundo) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        textarea.style.backgroundImage = `url('${reader.result}')`;
+        textarea.style.backgroundSize = `${larguraImagem}px ${alturaImagem}px`; // Define o tamanho da imagem
+        textarea.style.backgroundPosition = `${posicaoHorizontal} ${posicaoVertical}`; // Define a posição da imagem
+      };
+      reader.readAsDataURL(imagemFundo);
+    }
 
     fecharMenuContexto();
   }
@@ -62,7 +77,7 @@ function Agenda() {
           value={conteudo}
           onChange={areaDeTexto}
           onContextMenu={exibirMenuContexto}
-          style={{ width: '100%', height: '100%' }} // Ajusta a altura para ocupar a tela inteira
+          style={{ width: '100%', height: '400px' }}
         />
         <button className="agenda-button" onClick={salvar}>
           Salvar
@@ -77,24 +92,52 @@ function Agenda() {
               <option value="Arial">Arial</option>
               <option value="Verdana">Verdana</option>
               <option value="Times New Roman">Times New Roman</option>
-              <option value="Courier New">Courier New</option>
-              <option value="Georgia">Georgia</option>
-              <option value="Trebuchet MS">Trebuchet MS</option>
-              <option value="Arial Black">Arial Black</option>
-              <option value="Impact">Impact</option>
-              <option value="Lucida Sans Unicode">Lucida Sans Unicode</option>
-              <option value="Tahoma">Tahoma</option>
-              <option value="Verdana">Verdana</option>
-              <option value="Palatino Linotype">Palatino Linotype</option>   
             </select>
           </div>
           <div>
             <label htmlFor="tamanho-fonte">Tamanho da Fonte:</label>
-            <input type="number" id="tamanho-fonte" min="8" max="72" />
+            <input
+              type="number"
+              id="tamanho-fonte"
+              min="8"
+              max="72"
+              onChange={() => {
+                const textarea = document.getElementById('agenda-textarea');
+                textarea.style.fontSize = `${document.getElementById('tamanho-fonte').value}px`;
+              }}
+            />
           </div>
           <div>
             <label htmlFor="cor-fonte">Cor da Fonte:</label>
             <input type="color" id="cor-fonte" />
+          </div>
+          <div>
+            <label htmlFor="imagem-fundo">Imagem de Fundo:</label>
+            <input type="file" id="imagem-fundo" accept="image/*" />
+          </div>
+          <div>
+            <label htmlFor="largura-imagem">Largura da Imagem:</label>
+            <input type="number" id="largura-imagem" />
+          </div>
+          <div>
+            <label htmlFor="altura-imagem">Altura da Imagem:</label>
+            <input type="number" id="altura-imagem" />
+          </div>
+          <div>
+            <label htmlFor="posicao-horizontal">Posição Horizontal:</label>
+            <select id="posicao-horizontal">
+              <option value="left">Esquerda</option>
+              <option value="center">Centro</option>
+              <option value="right">Direita</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="posicao-vertical">Posição Vertical:</label>
+            <select id="posicao-vertical">
+              <option value="top">Topo</option>
+              <option value="center">Centro</option>
+              <option value="bottom">Fundo</option>
+            </select>
           </div>
           <button onClick={aplicarEstilo}>Aplicar Estilo</button>
         </div>
