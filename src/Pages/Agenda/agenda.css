@@ -16,6 +16,10 @@ body {
   font-size: 16px;
   font-family: sans-serif;
   resize: none;
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  background-size: contain 20px;
+  background-position: left center 10px; 
 }
 
 .agenda-button {
@@ -84,4 +88,54 @@ body {
   flex-grow: 1; 
   width: 100%; 
   height: 100%; 
+}
+.menu-contexto {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  z-index: 9999;
+}
+
+.menu-contexto label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.menu-contexto button {
+  margin-top: 10px;
+}
+
+.media-uploader {
+  margin-top: 10px;
+}
+
+input[type="file"][data-role="media-upload"] {
+  display: none;
+}
+.menu-contexto {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.menu-contexto div {
+  margin-bottom: 10px;
+}
+
+.menu-contexto label {
+  display: block;
+  font-weight: bold;
+}
+
+.menu-contexto input[type="number"] {
+  width: 60px;
+}
+
+.menu-contexto button {
+  margin-top: 10px;
 }
