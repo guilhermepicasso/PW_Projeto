@@ -56,7 +56,11 @@ import React, { useState, useRef } from 'react';
          textarea.style.backgroundSize = `${larguraImagem}px ${alturaImagem}px`;
          textarea.style.backgroundPosition = `${posicaoHorizontal} ${posicaoVertical}`;
          textarea.style.backgroundRepeat = 'no-repeat';
+<<<<<<< HEAD
          textarea.style.paddingTop = `${alturaImagem}px`;
+=======
+         textarea.style.paddingTop = `${alturaImagem}px`; // Move o texto para baixo da imagem
+>>>>>>> 6cda5e1352f860e037e2a81719bfa7d539eb80de
        };
        reader.readAsDataURL(imagemFundo);
      }
@@ -147,4 +151,8 @@ import React, { useState, useRef } from 'react';
    );
  }
  
+<<<<<<< HEAD
  export default Agenda;
+=======
+ export default Agenda;
+>>>>>>> 6cda5e1352f860e037e2a81719bfa7d539eb80de
