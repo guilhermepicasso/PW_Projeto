@@ -1,80 +1,41 @@
-import { useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
+/*********************************
+ ******|      Login.js     |******
+ *********************************/ 
+
+ import { useNavigate } from 'react-router-dom';
  
  
- function Cadastro() {
-     const [name, setName] = useState('');
-     const [email, setEmail] = useState('');
-     const [password, setPassword] = useState('');
+ function Login(props) {
+     const nome = "admin"
+     const password = "123"
      let pagina = useNavigate();
-
-     const handleNameChange = (event) => {
-        setName(event.target.value);
-      };
-
-     const handleEmailChange = (event) => {
-        setEmail(event.target.value);
-      };
-    
-      const handlePasswordChange = (event) => {
-        setPassword(event.target.value);
-      };
-    
-      const handleCadastro = async (event) => {
-        event.preventDefault();
-    
-        try {
-            const response = await fetch('http://localhost:3333/userinsert/', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ name, email, password }),
-            });
-          
-            if (response.ok) {
-              window.alert(`Usuário ${email} cadastrado com sucesso`);
-              pagina('/');
-            } else {
-              window.alert(`Usuario ou email já estão sendo usados`);
-            }
-          } catch (error) {
-            console.error('Ocorreu um erro ao fazer o cadastro:', error);
-          }
-      };
  
      return (
-        <form onSubmit={handleCadastro}>
          <section class="login-body">
-             <h1 class = "login-titulo">CapNotion</h1>
-             <div class="login-section">
-                 <label class="login-label">Usuário:</label>
-                 <input class="login-input" type="name" id="username" 
-                 value={name}
-                 onChange={handleNameChange}
-                 required
-                 />
+             
+             <h1 class = "login-titulo"></h1>
+             <div class="login-section" style={{ marginLeft: `${2}px` }} >
+             <div className="foto3"> <img src={"https://cdn.discordapp.com/attachments/822153718497411137/1116838149239357550/Cadastro4.capiva.png"}  width={420} height={390} alt="Casdatro"/> </div>
+                 <label class="login-label">Email:</label>
+                 <input class="login-input" type="text" id="email" />
                  <br/>
-                 <label class="login-label">email:</label>
-                 <input class="login-input" type="email" id="username" 
-                 value={email}
-                 onChange={handleEmailChange}
-                 required
-                 />
+                 <label class="login-label">Usuário:</label>
+                 <input class="login-input" type="text" id="username" />
                  <br/>
                  <label class="login-label">Senha:</label>
-                 <input class="login-input" type="password" id="password" 
-                 value={password}
-                 onChange={handlePasswordChange}
-                 required
-                 />
+                 <input class="login-input" type="password" id="password" />
+                 
                  <br/>
-                 <button class="login-button" type="submit" >Cadastrar</button>
-                 <br/>
+                 <button class="login-button" onClick={Cadastrar}>Cadastrar</button>
+                
              </div>
          </section>
-        </form>
      );
+ 
+     function Cadastrar() {
+        pagina('/agenda')
+     }
  };
  
- export default Cadastro;
+ export default Login;
+ 
