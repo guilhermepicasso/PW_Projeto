@@ -7,6 +7,7 @@ import './agenda.css';
 
 function Agenda() {
   const [conteudo, setConteudo] = useState('');
+  const [gifFile, setGifFile] = useState(null);
   const menuContextoRef = useRef(null);
 
   function salvar() {
@@ -17,6 +18,8 @@ function Agenda() {
   function deletar() {
     setConteudo('');
     localStorage.removeItem('conteudo');
+    const textarea = document.getElementById('agenda-textarea');
+    textarea.style.backgroundImage = '';
   }
 
   function areaDeTexto(e) {
@@ -38,7 +41,7 @@ function Agenda() {
     const tamanhoFonte = menu.querySelector('#tamanho-fonte').value;
     const corFonte = menu.querySelector('#cor-fonte').value;
     const imagemFundoInput = menu.querySelector('#imagem-fundo');
-    const imagemFundo = imagemFundoInput.files[0];
+    const imagemFundo = imagemFundoInput.files[0] || gifFile;
     const larguraImagem = menu.querySelector('#largura-imagem').value;
     const alturaImagem = menu.querySelector('#altura-imagem').value;
     const posicaoHorizontal = menu.querySelector('#posicao-horizontal').value;
@@ -53,8 +56,8 @@ function Agenda() {
       const reader = new FileReader();
       reader.onload = () => {
         textarea.style.backgroundImage = `url('${reader.result}')`;
-        textarea.style.backgroundSize = `${larguraImagem}px ${alturaImagem}px`; // Define o tamanho da imagem
-        textarea.style.backgroundPosition = `${posicaoHorizontal} ${posicaoVertical}`; // Define a posição da imagem
+        textarea.style.backgroundSize = `${larguraImagem}px ${alturaImagem}px`;
+        textarea.style.backgroundPosition = `${posicaoHorizontal} ${posicaoVertical}`;
       };
       reader.readAsDataURL(imagemFundo);
     }
@@ -112,8 +115,8 @@ function Agenda() {
             <input type="color" id="cor-fonte" />
           </div>
           <div>
-            <label htmlFor="imagem-fundo">Imagem de Fundo:</label>
-            <input type="file" id="imagem-fundo" accept="image/*" />
+          <label htmlFor="imagem-fundo">Imagem de Fundo:</label>
+  <input type="file" id="imagem-fundo" accept="image/*,.gif" onChange={(e) => setGifFile(e.target.files[0])} />
           </div>
           <div>
             <label htmlFor="largura-imagem">Largura da Imagem:</label>
