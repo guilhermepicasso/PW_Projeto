@@ -1,21 +1,85 @@
-
 .titulo{
-    color: rgb(23, 22, 22);
+    color: rgb(0, 25, 247);
     display: flex;
-    align-items: center;
-    justify-content: center;    
+    align-items: center; 
+    justify-content:left;
+
 }
 .senac{
-    color: rgb(23, 22, 22);
+    margin-top: 8%;
+    color: rgb(6, 63, 221);
     font-size: 35px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: aliceblue;
+    border: 10px solid #ffd61e; 
+    
+
 }
-.nome{
-    color: rgb(23, 22, 22);
+
+
+.sobreimagem1{
+    margin-top: -21%;
+    background-color:orange;
+    border: 10px solid #ffd61e; 
+    display:grid;
+    align-items: center;
+    justify-content:center;
+    
+}
+
+.nome1{
+    margin-top: 0%;
+    color: rgb(6, 63, 221);
     font-size: 25px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 4px solid #ffd61e; 
+background-color: rgb(255, 255, 255);
+font-family: Arial, sans-serif;
+
+}
+.nome2{
+    color: rgb(6, 63, 221);
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #ffd61e; 
+    background-color: rgb(255, 255, 255);
+    font-family: Arial, sans-serif;
+}
+
+.nome3{
+    color: rgb(6, 63, 221);
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #ffd61e; 
+    background-color: rgb(255, 255, 255);
+    font-family: Arial, sans-serif;
+}
+.nome4{
+    color: rgb(6, 63, 221);
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #ffd61e; ;
+    background-color: rgb(255, 255, 255);
+    font-family: Arial, sans-serif;
+}
+
+.nome5{
+    color: rgb(6, 63, 221);
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px solid #ffd61e; 
+    background-color: rgb(255, 255, 255);
+    font-family: Arial, sans-serif;
 }

@@ -1,46 +1,93 @@
 .login-titulo {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-  }
+  position: absolute;
+  color: rgb(0, 0, 0);
+  font-family: Verdana;
+  top: 10%;
+  left: 50%;
+  font-size: 50px;
+  margin-left: -8%;
+  border: 0px solid #000000; 
+  border-radius: 0px; 
+  
+
+}
 
 .login-body {
-    background-color: orange;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
+  background-color: #FF9900;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-section {
+  background-color: white;
+  padding: 40px;
+  border: 5px solid #000000; 
+  border-radius: 10px; 
+  margin-left: -300px;
   
-  .login-section {
-    background-color: white;
-    border-radius: 10px;
-    padding: 20px;
-  }
   
-  .login-label {
-    display: block;
-    margin-bottom: 5px;
-  }
   
-  .login-input {
-    margin-bottom: 10px;
-    padding: 5px;
-    border-radius: 5px;
-    border: none;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
-  }
   
-  .login-button {
-    background-color: blue;
-    color: white;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
   
-  .login-button:hover {
-    background-color: darkblue;
-  }
+}
+
+.login-label {
+  display: block;
+  margin-bottom: 25 px;
+  border-radius: 8px;
+  border: 0px solid #000000; 
+  font-family:Impact;
+  color: rgb(238, 120, 10);
+  
+  
+
+}
+
+.login-input {
+  margin-bottom: 29px;
+  padding: 20px;
+  border: none;
+  box-shadow: 5px 5px 2px rgba(255, 94, 0, 0.678);
+  border: 3px solid  rgba(255, 94, 0, 0.678);
+
+  
+}
+
+.login-button {
+  background-color: rgb(94, 72, 47);
+  color: rgb(247, 247, 247);
+  padding: 20px 35px;
+  border: none;
+  font-family:'Arial Narrow Bold', sans-serif;
+  cursor: pointer;
+ 
+}
+
+.login-button:hover {
+  background-color: rgb(0, 0, 0);
+  color: rgb(241, 177, 0);
+  
+  
+}
+.foto1 {
+  position: absolute;
+  top: 31%;
+  left: 52%;
+  border: 5px solid #000000;
+  background-color: rgb(255, 255, 255);
+ 
+}  
+.foto2 {
+  border: 5px solid #000000;
+  position: absolute;
+  top: 5%;
+  left: 45%
+  
+  
+  
+
+  
+ 
+}

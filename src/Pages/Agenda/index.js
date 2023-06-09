@@ -1,17 +1,14 @@
 /*********************************
  ******|      AgendaO.js     |******
  *********************************/ 
-
- import React, { useState } from 'react';
+ import React, { useState, useRef } from 'react';
 import Header from '../../components/Header/header';
 import './agenda.css';
 
 function Agenda() {
   const [conteudo, setConteudo] = useState('');
-  const [fonte, setFonte] = useState('Arial, sans-serif');
-  const [tamanhoFonte, setTamanhoFonte] = useState('16px');
-  const [corFonte, setCorFonte] = useState('#000000');
-  const [imagem, setImagem] = useState('');
+  const [gifFile, setGifFile] = useState(null);
+  const menuContextoRef = useRef(null);
 
   function salvar() {
     localStorage.setItem('conteudo', conteudo);
@@ -21,31 +18,56 @@ function Agenda() {
   function deletar() {
     setConteudo('');
     localStorage.removeItem('conteudo');
+    const textarea = document.getElementById('agenda-textarea');
+    textarea.style.backgroundImage = '';
   }
 
   function areaDeTexto(e) {
     setConteudo(e.target.value);
   }
 
-  function alterarFonte(e) {
-    setFonte(e.target.value);
+  function exibirMenuContexto(e) {
+    e.preventDefault();
+
+    const menu = menuContextoRef.current;
+    menu.style.display = 'block';
+    menu.style.left = `${e.clientX}px`;
+    menu.style.top = `${e.clientY}px`;
   }
 
-  function alterarTamanhoFonte(e) {
-    setTamanhoFonte(e.target.value);
+  function aplicarEstilo() {
+    const menu = menuContextoRef.current;
+    const fonte = menu.querySelector('#fonte').value;
+    const tamanhoFonte = menu.querySelector('#tamanho-fonte').value;
+    const corFonte = menu.querySelector('#cor-fonte').value;
+    const imagemFundoInput = menu.querySelector('#imagem-fundo');
+    const imagemFundo = imagemFundoInput.files[0] || gifFile;
+    const larguraImagem = menu.querySelector('#largura-imagem').value;
+    const alturaImagem = menu.querySelector('#altura-imagem').value;
+    const posicaoHorizontal = menu.querySelector('#posicao-horizontal').value;
+    const posicaoVertical = menu.querySelector('#posicao-vertical').value;
+
+    const textarea = document.getElementById('agenda-textarea');
+    textarea.style.fontFamily = fonte;
+    textarea.style.fontSize = `${tamanhoFonte}px`;
+    textarea.style.color = corFonte;
+
+    if (imagemFundo) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        textarea.style.backgroundImage = `url('${reader.result}')`;
+        textarea.style.backgroundSize = `${larguraImagem}px ${alturaImagem}px`;
+        textarea.style.backgroundPosition = `${posicaoHorizontal} ${posicaoVertical}`;
+      };
+      reader.readAsDataURL(imagemFundo);
+    }
+
+    fecharMenuContexto();
   }
 
-  function alterarCorFonte(e) {
-    setCorFonte(e.target.value);
-  }
-
-  function selecionarImagem(e) {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      setImagem(event.target.result);
-    };
-    reader.readAsDataURL(file);
+  function fecharMenuContexto() {
+    const menu = menuContextoRef.current;
+    menu.style.display = 'none';
   }
 
   return (
@@ -53,53 +75,75 @@ function Agenda() {
       <Header />
       <div className="agenda-body">
         <textarea
+          id="agenda-textarea"
           className="agenda-textarea"
           value={conteudo}
           onChange={areaDeTexto}
-          style={{ fontFamily: fonte, fontSize: tamanhoFonte, color: corFonte }}
+          onContextMenu={exibirMenuContexto}
+          style={{ width: '100%', height: '400px' }}
         />
-        <div>
-          <label htmlFor="fonte">Fonte:</label>
-          <select id="fonte" value={fonte} onChange={alterarFonte}>
-            <option value="Arial, sans-serif">Arial</option>
-            <option value="Verdana, sans-serif">Verdana</option>
-            <option value="Times New Roman, serif">Times New Roman</option>
-          </select>
-        </div>
-        <div>
-          <label htmlFor="tamanho-fonte">Tamanho da fonte:</label>
-          <input
-            id="tamanho-fonte"
-            type="text"
-            value={tamanhoFonte}
-            onChange={alterarTamanhoFonte}
-          />
-        </div>
-        <div>
-          <label htmlFor="cor-fonte">Cor da fonte:</label>
-          <input
-            id="cor-fonte"
-            type="color"
-            value={corFonte}
-            onChange={alterarCorFonte}
-          />
-        </div>
-        <div>
-          <label htmlFor="imagem">Imagem:</label>
-          <input
-            id="imagem"
-            type="file"
-            accept="image/*"
-            onChange={selecionarImagem}
-          />
-          {imagem && <img src={imagem} alt="Imagem selecionada" />}
-        </div>
         <button className="agenda-button" onClick={salvar}>
           Salvar
         </button>
         <button className="agenda-button" onClick={deletar}>
           Deletar
         </button>
+        <div className="menu-contexto" ref={menuContextoRef} onContextMenu={fecharMenuContexto}>
+          <div>
+            <label htmlFor="fonte">Fonte:</label>
+            <select id="fonte">
+              <option value="Arial">Arial</option>
+              <option value="Verdana">Verdana</option>
+              <option value="Times New Roman">Times New Roman</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="tamanho-fonte">Tamanho da Fonte:</label>
+            <input
+              type="number"
+              id="tamanho-fonte"
+              min="8"
+              max="72"
+              onChange={() => {
+                const textarea = document.getElementById('agenda-textarea');
+                textarea.style.fontSize = `${document.getElementById('tamanho-fonte').value}px`;
+              }}
+            />
+          </div>
+          <div>
+            <label htmlFor="cor-fonte">Cor da Fonte:</label>
+            <input type="color" id="cor-fonte" />
+          </div>
+          <div>
+          <label htmlFor="imagem-fundo">Imagem de Fundo:</label>
+  <input type="file" id="imagem-fundo" accept="image/*,.gif" onChange={(e) => setGifFile(e.target.files[0])} />
+          </div>
+          <div>
+            <label htmlFor="largura-imagem">Largura da Imagem:</label>
+            <input type="number" id="largura-imagem" />
+          </div>
+          <div>
+            <label htmlFor="altura-imagem">Altura da Imagem:</label>
+            <input type="number" id="altura-imagem" />
+          </div>
+          <div>
+            <label htmlFor="posicao-horizontal">Posição Horizontal:</label>
+            <select id="posicao-horizontal">
+              <option value="left">Esquerda</option>
+              <option value="center">Centro</option>
+              <option value="right">Direita</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="posicao-vertical">Posição Vertical:</label>
+            <select id="posicao-vertical">
+              <option value="top">Topo</option>
+              <option value="center">Centro</option>
+              <option value="bottom">Fundo</option>
+            </select>
+          </div>
+          <button onClick={aplicarEstilo}>Aplicar Estilo</button>
+        </div>
       </div>
     </>
   );
