@@ -64,7 +64,7 @@
                  required
                  />
                  <br/>
-                 <button class="login-button" type="submit" >Confirmar</button>
+                 <button class="login-button" type="submit">Confirmar</button>
                  <br/>
                  <Link to="/cadastro">Não tenho conta</Link>
                  <div className="foto1"><img src={imagePath} alt="Capivara" width={400} /></div>
